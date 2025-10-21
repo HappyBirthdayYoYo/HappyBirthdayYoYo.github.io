@@ -1,18 +1,52 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-    /* Custom CSS for Glassmorphism, 3D Tilt, and Glow Effects */
+    /* Custom CSS for Glassmorphism, 3D Tilt, Glow, and CONFETTI */
+    
+    /* Keyframes for the confetti drop animation */
+    @keyframes confetti-fall {
+        0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Container for the confetti */
+    .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* Allows clicks to pass through */
+        overflow: hidden;
+        z-index: 10; /* Below the main card */
+    }
+
+    /* Individual confetti piece styling */
+    .confetti-piece {
+        position: absolute;
+        width: 8px;
+        height: 16px;
+        background-color: transparent;
+        border-radius: 2px;
+        opacity: 0;
+        animation-name: confetti-fall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    /* Glassmorphism, 3D Tilt, and Glow Effects */
     .glass-card {
-        background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
-        backdrop-filter: blur(8px); /* Frosted glass effect */
-        -webkit-backdrop-filter: blur(8px); /* Safari support */
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px #facc1555; /* Deep shadow with yellow glow */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px #facc1555;
         transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
         transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+        z-index: 20; /* Above the confetti */
     }
     .glass-card:hover {
         transform: perspective(1000px) rotateX(1deg) rotateY(1deg) scale(1.02);
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 60px #FACC15; /* Brighter glow on hover */
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 60px #FACC15;
     }
     .header-gradient {
         background-image: linear-gradient(135deg, #B91C1C, #FACC15);
@@ -28,29 +62,37 @@
                 colors: {
                     'custom-red': '#B91C1C',
                     'custom-yellow': '#FACC15',
-                    'custom-dark': '#1A1A2E', /* New deep background color */
+                    'custom-dark': '#1A1A2E',
                 }
             },
         }
     }
 </script>
 
+<!-- BIRTHDAY CHIME AUDIO ELEMENT -->
+<!-- This link uses a publicly available, free fanfare sound effect. -->
+<audio id="birthday-chime" src="https://assets.mixkit.co/sfx/download/mixkit-small-fanfare-1845.wav" preload="auto"></audio>
+
 <div id="app" class="min-h-screen bg-custom-dark flex flex-col items-center justify-center p-4">
-    <!-- Applied glass-card class and removed all old border/shadow classes -->
+
+    <!-- CONFETTI CONTAINER - THE BIRTHDAY EFFECT -->
+    <div class="confetti-container" id="confetti-container"></div>
+    
+    <!-- MAIN CARD -->
     <div class="max-w-4xl w-full rounded-xl overflow-hidden glass-card">
         
-        <!-- Applied gradient class -->
+        <!-- HEADER -->
         <header class="p-6 header-gradient text-white text-center rounded-t-xl">
             <h1 class="text-4xl font-extrabold tracking-tight drop-shadow-lg">
-                🎉 Happy Birthday, My Amazing Friend! 🎉
+                🎉 Happy Birthday, My Amazing Nigger! 🎉
             </h1>
         </header>
 
-        <!-- Main Content Area: Background changed to a dark, semi-transparent color -->
+        <!-- Main Content Area -->
         <div class="flex flex-col md:flex-row p-6 bg-gray-900/60">
             
             <div class="md:w-1/2 w-full flex justify-center items-center p-4">
-                <!-- Image source updated to reference 'yoyo.jpg' directly in the same folder -->
+                <!-- Image source references 'yoyo.jpg' -->
                 <img 
                     src="yoyo.jpg" 
                     onerror="this.onerror=null;this.src='https://placehold.co/400x500/FACC15/78350F?text=Image+Load+Failed';"
@@ -59,20 +101,20 @@
                 >
             </div>
 
-            <!-- Message Section: Text colors updated for dark theme -->
+            <!-- Message Section -->
             <div class="md:w-1/2 w-full p-4 flex flex-col justify-center space-y-6">
                 
                 <h2 class="text-2xl font-bold text-custom-yellow border-b pb-2 border-red-800">
-                    A Message from Your nigger
+                    A Message from A Nigger
                 </h2>
                 
                 <p class="text-lg text-gray-200 leading-relaxed italic">
-                    "This isn't just a drawing; it’s a representation of how great a friend you are. You’re loyal, supportive, and always there(bairum ka mazak urane ke liye), making every year better than the last. Thank you for being such an incredible nigger."
+                    "This isn't just a drawing; it’s a representation of how great a friend you are. You’re a nigger, funny, and always there(bairum ki lene ke liye!), making every year better than the last. Thank you for being such an incredible nigger!."
                 </p>
                 
                 <div class="pt-4 border-t border-gray-700">
                     <p class="text-3xl font-extrabold text-custom-yellow tracking-wide mt-2 drop-shadow-md">
-                        tumhare phir bhi mere se zyada ayenge(ab to tum bhi cheeme ki tarhan parh rahe ho!)
+                        tumhare phir bhi mere se zyada ayenge (cheeme bante jaa rahe ho!)
                     </p>
                     <p class="text-sm text-gray-400 mt-1">
                         (A true niggers promise!)
@@ -80,7 +122,55 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Footer removed as requested -->
     </div>
 </div>
+
+<script>
+    const confettiColors = ['#FACC15', '#B91C1C', '#FFFFFF', '#06B6D4']; // Gold, Red, White, Cyan
+    const container = document.getElementById('confetti-container');
+    const audio = document.getElementById('birthday-chime');
+
+    function createConfetti() {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        
+        const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.width = (Math.random() * 5 + 5) + 'px';
+        piece.style.height = (Math.random() * 10 + 10) + 'px';
+        piece.style.backgroundColor = color;
+        
+        piece.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        piece.style.animationDelay = (Math.random() * 5) + 's';
+
+        container.appendChild(piece);
+
+        setTimeout(() => piece.remove(), 9000);
+    }
+
+    function initializeCardEffects() {
+        // 1. Play sound
+        // Note: Browsers sometimes block autoplay; a user interaction might be needed.
+        audio.play().catch(error => {
+            console.log("Audio autoplay failed. User interaction is required to play sound.");
+        });
+
+        // 2. Start confetti generation
+        for (let i = 0; i < 100; i++) {
+            createConfetti();
+        }
+        setInterval(createConfetti, 500); 
+    }
+
+    // Initialize effects when the window loads
+    window.onload = initializeCardEffects;
+
+    // Fallback: If autoplay is blocked, try to play the sound on any click interaction
+    document.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().catch(() => {});
+        }
+    });
+
+</script>
